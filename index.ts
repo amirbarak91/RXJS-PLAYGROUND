@@ -1,7 +1,7 @@
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-const observable$:Observable<any> = new Observable((observer)=>{
+const observable$:Observable<number> = new Observable<number>((observer)=>{
 
     observer.next(1);
     observer.next(2);
@@ -15,11 +15,12 @@ const observable$:Observable<any> = new Observable((observer)=>{
     },2000);
 });
 
-const piped_observable$:Observable<any> = observable$.pipe(
+const piped_observable$:Observable<string> = observable$.pipe(
     map((x)=> x + 'unknown')
-)
+);
 
-const subscription:Subscription = piped_observable$.subscribe((value)=>{
+const subscription:Subscription= piped_observable$.subscribe((value:string)=>{
     console.log(value);
-})
+});
 
+subscription.unsubscribe();
